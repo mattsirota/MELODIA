@@ -9,9 +9,9 @@ export default class Spotify extends Component {
         }
     }
     handleButtonClick = () => {
-        axios.get('/getWeatherNewYork').then(response => {
+        axios.get('/login').then(response => {
             this.setState({
-                weather: response.data.temp_c
+                weather: 500
             });
         });
     };
