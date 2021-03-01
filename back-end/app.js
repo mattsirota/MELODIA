@@ -2,6 +2,7 @@ const express = require('express');
 var request = require('request');
 const app = express();
 const port = 5000;
+const cors = require('cors');
 
 const queryString = require('query-string');
 const userData = require('./userData');
@@ -31,18 +32,18 @@ app.get('/login/authorize', async (req, res) =>
     {
         auth_code = req.query.code
         token = await userData.getToken(my_client_id, my_client_secret, auth_code, redirect_uri);
-        res.redirect('http://localhost:5000/profile');
+        res.redirect('http://localhost:3000');
     }
 }),
 
 app.get('/profile', async (req, res) =>
 {
     if (token == undefined)
-        res.send("Error: Must be logged in to view profile");
+        res.send({"display_name": "Error: Must be logged in to view profile"});
     else
     {
         let info = await userData.getProfile(token.access_token);
-        res.send(info.display_name);
+        res.send(info);
     }
 
 }),

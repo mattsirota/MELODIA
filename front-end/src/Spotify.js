@@ -5,13 +5,18 @@ export default class Spotify extends Component {
     constructor() {
         super();
         this.state = {
-            weather: "Not yet gotten"
+            status: "Click profile to see status"
         }
+
     }
-    handleButtonClick = () => {
-        axios.get('/login').then(response => {
+    //this is just to show functionality for now
+    //since we dont have more pages
+    //localhost:5000/login is currently just redirecting back to this page
+    profileClick = () => {
+        axios.get('/profile').then(response => {
+            console.log(response);
             this.setState({
-                weather: 500
+                status: response.data.display_name
             });
         });
     };
@@ -19,8 +24,9 @@ export default class Spotify extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.handleButtonClick}>Login to Spotify</button>
-                <h1>The login in Spotify is: {this.state.weather}</h1>
+                <a href="http://localhost:5000/login"><button>Sign In With Spotify</button></a>
+                <button onClick={this.profileClick}>Profile</button>
+                <h1>Spotify login status: {this.state.status}</h1>
             </div>
         )
     }
