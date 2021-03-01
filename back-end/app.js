@@ -2,14 +2,14 @@ const express = require('express');
 var request = require('request');
 const app = express();
 const port = 5000;
-const cors = require('cors');
 
 const queryString = require('query-string');
 const userData = require('./userData');
 
 const my_client_id = '183edbaeffc94b3694e9153488fbf9b5';
 const redirect_uri = 'http://localhost:5000/login/authorize';
-const my_client_secret = 'fec9226811a04cd5a4e36d079ba2a90e';
+//replace my_client_secret with your client secret code
+const my_client_secret = 'CLIENT_SECRET';
 var auth_code = undefined;
 var token = undefined;
 
