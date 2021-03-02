@@ -9,7 +9,7 @@ const userData = require('./userData');
 const my_client_id = '183edbaeffc94b3694e9153488fbf9b5';
 const redirect_uri = 'http://localhost:5000/login/authorize';
 //replace my_client_secret with your client secret code
-const my_client_secret = 'CLIENT_SECRET';
+const my_client_secret = '7477db1a3f04429b8ca430c69d91344c';
 var auth_code = undefined;
 var token = undefined;
 
@@ -32,7 +32,7 @@ app.get('/login/authorize', async (req, res) =>
     {
         auth_code = req.query.code
         token = await userData.getToken(my_client_id, my_client_secret, auth_code, redirect_uri);
-        res.redirect('http://localhost:3000');
+        res.redirect('http://localhost:3000/artists');
     }
 }),
 
