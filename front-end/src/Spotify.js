@@ -25,7 +25,6 @@ export default class Spotify extends Component {
         return (
             <div>
                 <a href="http://localhost:5000/login"><button>Sign In With Spotify</button></a>
-                <h1>Spotify login status: {this.state.status}</h1>
             </div>
         )
     }
