@@ -9,7 +9,7 @@ const userData = require('./userData');
 const my_client_id = '183edbaeffc94b3694e9153488fbf9b5';
 const redirect_uri = 'http://localhost:5000/login/authorize';
 //replace my_client_secret with your client secret code
-const my_client_secret = '7477db1a3f04429b8ca430c69d91344c';
+const my_client_secret = 'CLIENT_SECRET';
 var auth_code = undefined;
 var token = undefined;
 
