@@ -1,0 +1,58 @@
+[
+
+    {
+        "genres": [
+        "brooklyn drill"
+        ],
+        "name": "Pop Smoke",
+        "imageurl": "https://i.scdn.co/image/4d68f134b9ccfc7b9c22b4ed0abc98dccecc5fb2",
+        "popularity": 94,
+        "type": "artist",
+        "uri": "spotify:artist:0eDvMgVFoNV3TpwtrVCoTj"
+    },
+    {
+        "genres": [
+        "deep underground hip hop",
+        "kentucky hip hop",
+        "pop rap",
+        "rap"
+        ],
+        "name": "Jack Harlow",
+        "imageurl": "https://i.scdn.co/image/360bd37c8439b95b4258b233aa12ede454d75b48",
+        "popularity": 85,
+        "type": "artist",
+        "uri": "spotify:artist:2LIk90788K0zvyj2JJVwkJ"
+    },
+    {
+        "genres": [
+          "album rock",
+          "art rock",
+          "classic rock",
+          "progressive rock",
+          "psychedelic rock",
+          "rock",
+          "symphonic rock"
+        ],
+          
+        "imageurl": "https://i.scdn.co/image/f0a39a8a196a87a7236bdcf8a8708f6d5d3547cc",  
+        "name": "Pink Floyd",
+        "popularity": 84,
+        "type": "artist",
+        "uri": "spotify:artist:0k17h0D3J5VfsdmQ1iZtE9"
+    },
+    {
+        "genres": [
+          "alternative rock",
+          "funk metal",
+          "funk rock",
+          "permanent wave",
+          "rock"
+        ],
+
+        "imageurl": "https://i.scdn.co/image/8def8c4db6061deb04daca08e43bcde57181ec8b",
+        "name": "Red Hot Chili Peppers",
+        "popularity": 86,
+        "type": "artist",
+        "uri": "spotify:artist:0L8ExT028jH3ddEcZwqJJ5"
+      }
+]
