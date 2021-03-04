@@ -1,15 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import ArtistComponent from "./components/artist_comp";
-import Artists from "./Artists.json"
-
-console.log(Artists)
-
+import axios from 'axios'
 
 function App() {
-  const[Artist, setArtist] = useState([])
-
-  useEffect(() => setArtist(Artists), []);
-
+  const [artists, setArtists] = useState([])
+  
+  useEffect(() => {
+      axios
+        .get("http://localhost:5000/artists")
+        .then(res => {
+            console.log(res.data.items)
+            setArtists(res.data.items)
+          }
+        )
+  }, [])
 
   return (
     <div className="App">
@@ -17,10 +21,10 @@ function App() {
         Top Artists
       </header>
       {
-        Artist.length === 0 ? (
+        artists.length === 0 ? (
           <p>Fetching your artists!</p>
         ) : (
-          Artist.map(artist => (
+          artists.map(artist => (
             <ArtistComponent artist={artist} key={artist}/>
           ))
         )

@@ -5,7 +5,7 @@ import React from 'react';
 const ArtistComponent = ({artist}) => (
     <div className='flex bg-white shadow-md m-4 p-4 rounded'>
         <div>
-            <img src= {artist.imageurl} alt={artist.name}>
+            <img src= {artist.images[0].url} alt={artist.name}>
                 </img>
         </div>
         <div className='flex flex-col  ml-4'>
