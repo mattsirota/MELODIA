@@ -8,7 +8,7 @@ function Footer() {
     <div className='footer-container'>
       <section className='footer-subscription'>
         <p className='footer-subscription-heading'>
-        What do you think of Melodia ?
+          What do you think of Melodia ?
         </p>
         <div className='input-areas'>
           <form>
@@ -33,13 +33,13 @@ function Footer() {
       <section class='social-media'>
         <div class='social-media-wrap'>
           <div class='footer-logo'>
-            <Link to='/' className='social-logo'>
+            <Link to='/home' className='social-logo'>
               MELODIA
             </Link>
           </div>
           <small class='website-rights'>MELODIA © 2021</small>
           <div class='social-icons'>
-            <a href = "https://www.spotify.com/us/"
+            <a href="https://www.spotify.com/us/"
               class='social-icon-link Spotify'
               to='/'
               target='_blank'
@@ -47,7 +47,7 @@ function Footer() {
             >
               <i class='fab fa-spotify' />
             </a>
-            <a href = "https://github.com/mattsirota/MELODIA"
+            <a href="https://github.com/mattsirota/MELODIA"
               class='social-icon-link Github'
               to='/'
               target='_blank'
