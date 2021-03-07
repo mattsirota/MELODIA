@@ -37,7 +37,6 @@ function LoginNavbar() {
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
 
           </ul>
-          {button && <Button buttonStyle='btn--outline'>SIGN IN</Button>}
         </div>
       </nav>
     </>

@@ -1,6 +1,14 @@
 import React from 'react';
 import '../../App.css';
+import NavBar from '../Navbar'
 
-export default function Playlist() {
-  return <h1 className='playlist'>CREATE THE PLAYLIST HERE!</h1>;
+function Playlist() {
+  return (
+    <>
+      <NavBar />
+      <h1 className='playlist'>CREATE THE PLAYLIST HERE!</h1>;
+    </>
+  );
 }
+
+export default Playlist;

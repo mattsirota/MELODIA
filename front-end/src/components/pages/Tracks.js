@@ -1,6 +1,14 @@
 import React from 'react';
 import '../../App.css';
+import NavBar from '../Navbar'
 
-export default function Tracks() {
-  return <h1 className='tracks'>Here goes the tracks lists!!</h1>;
+function Tracks() {
+  return (
+    <>
+      <NavBar />
+      <h1 className='tracks'>Here goes the tracks lists!!</h1>;
+    </>
+  );
 }
+
+export default Tracks;

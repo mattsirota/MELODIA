@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 import { Button } from './Button';
-import './HeroSection.css';
+import './HomeSection.css';
 
 function LoginSection() {
   return (
@@ -15,7 +15,7 @@ function LoginSection() {
           buttonStyle='btn--outline'
           buttonSize='btn--large'
         >
-          GET STARTED
+          What's this?
         </Button>
         <Button
           className='btns'
@@ -23,7 +23,7 @@ function LoginSection() {
           buttonSize='btn--large'
           onClick={console.log('hey')}
         >
-          WATCH TRAILER <i className='far fa-play-circle' />
+          SIGN IN WITH SPOTIFY <i className='fab fa-spotify' />
         </Button>
       </div>
     </div>
