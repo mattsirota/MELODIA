@@ -9,7 +9,6 @@ function Login() {
     <>
       <LoginNavbar />
       <LoginSection />
-      <Spotify />
     </>
   );
 }
