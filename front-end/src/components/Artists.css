@@ -22,6 +22,8 @@ h1 {
 }
 
 .cards__items {
+  display: flex;
+  flex-flow: row wrap;
   margin-bottom: 24px;
 }
 
@@ -30,6 +32,7 @@ h1 {
   flex: 1;
   margin: 0 1rem;
   border-radius: 10px;
+  margin-bottom: 2rem;
 }
 
 .cards__item__link {
@@ -97,6 +100,7 @@ h1 {
   color: #252e48;
   font-size: 18px;
   line-height: 24px;
+  text-align: center;
 }
 
 @media only screen and (min-width: 1200px) {
