@@ -41,3 +41,31 @@
   color: #242424;
   transition: 250ms;
 }
+
+.btn-selected {
+  border: 8px solid rgb(0, 255, 255);
+}
+
+.btn-unselected {
+  border: 8px solid rgb(255, 255, 255);
+}
+
+.btn__container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  max-width: 1120px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.btn__wrapper {
+  position: relative;
+  margin: 50px 0 0px;
+}
+
+.btn__items {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 24px;
+}

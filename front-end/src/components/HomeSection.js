@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
-import { Button } from './Button';
 import './HomeSection.css';
 import axios from 'axios';
 
