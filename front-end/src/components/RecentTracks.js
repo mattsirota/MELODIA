@@ -29,7 +29,7 @@ function Recents() {
                 src={recents.track.album.images[0].url}
                 text={recents.track.name}
                 label = {count++}
-                path={recents.track.external_urls.spotify}
+                path={recents.track.external_urls.spotify} target="_blank"
                 />
               )))
             }
