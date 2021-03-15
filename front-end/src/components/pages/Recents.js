@@ -8,9 +8,8 @@ function Recent() {
   return (
     <>
       <NavBar />
-      <h1 className='recents'>Here goes recent Tracks!</h1>;
-      <Recents/>
-      <Footer/>    
+      <Recents />
+      <Footer />
     </>
   );
 }

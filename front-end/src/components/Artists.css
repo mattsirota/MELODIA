@@ -103,6 +103,13 @@ h1 {
   text-align: center;
 }
 
+.cards__item__text1 {
+  color: lightslategrey;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+}
+
 @media only screen and (min-width: 1200px) {
   .content__blog__container {
     width: 84%;
