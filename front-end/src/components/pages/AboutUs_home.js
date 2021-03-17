@@ -2,10 +2,10 @@ import React from 'react';
 import '../../App.css';
 import './AboutUs.css'
 import { Button } from '../Button';
-import LoginNavbar from '../LoginNavbar';
+import Navbar from '../Navbar';
 function AboutUs() {
     return (
-      <> <LoginNavbar />
+      <> <Navbar />
         <div className='AboutUs-container'>
           <section className='AboutUs-subscription'>
             <p className='AboutUs-subscription-heading'>
