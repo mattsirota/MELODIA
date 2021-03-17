@@ -1,14 +1,17 @@
 import React from 'react';
 import '../../App.css';
 import NavBar from '../Navbar'
+import Footer from '../Footer';
+import Recents from '../RecentTracks'
 
-function Recents() {
+function Recent() {
   return (
     <>
       <NavBar />
-      <h1 className='recents'>Here goes recents playlist!</h1>;
+      <Recents />
+      <Footer />
     </>
   );
 }
 
-export default Recents;
+export default Recent;

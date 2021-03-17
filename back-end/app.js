@@ -20,92 +20,77 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 });
 
-app.get('/login', async (req, res) =>
-{
+app.get('/login', async (req, res) => {
     var scope = 'user-read-private user-read-email user-top-read user-read-recently-played';
     res.redirect('https://accounts.spotify.com/authorize?' +
         queryString.stringify({
-        response_type: 'code',
-        client_id: my_client_id,
-        scope: scope,
-        redirect_uri: redirect_uri,
-      }));
+            response_type: 'code',
+            client_id: my_client_id,
+            scope: scope,
+            redirect_uri: redirect_uri,
+        }));
 }),
 
-app.get('/login/authorize', async (req, res) =>
-{
-    if (req.query.code == undefined)
-        res.send("Not authorized to view this page");
-    else
-    {
-        auth_code = req.query.code
-        token = await userData.getToken(my_client_id, my_client_secret, auth_code, redirect_uri);
-        res.redirect('http://localhost:3000/home');
-    }
-}),
+    app.get('/login/authorize', async (req, res) => {
+        if (req.query.code == undefined)
+            res.send("Not authorized to view this page");
+        else {
+            auth_code = req.query.code
+            token = await userData.getToken(my_client_id, my_client_secret, auth_code, redirect_uri);
+            res.redirect('http://localhost:3000/home');
+        }
+    }),
 
-app.get('/profile', async (req, res) =>
-{
-    if (token == undefined)
-        res.send({"display_name": "Error: Must be logged in to view profile"});
-    else
-    {
-        let info = await userData.getProfile(token.access_token);
-        res.send(info);
-    }
+    app.get('/profile', async (req, res) => {
+        if (token == undefined)
+            res.send({ "display_name": "Error: Must be logged in to view profile" });
+        else {
+            let info = await userData.getProfile(token.access_token);
+            res.send(info);
+        }
 
-}),
+    }),
 
-app.get('/artists', async (req, res) =>
-{
-    if (token == undefined)
-        res.send("Error: Must be logged in to view artists");
-    else
-    {
-        let info = await userData.getArtists(token.access_token);
-        res.json(info);
-    }
-});
+    app.get('/artists', async (req, res) => {
+        if (token == undefined)
+            res.send("Error: Must be logged in to view artists");
+        else {
+            let info = await userData.getArtists(token.access_token);
+            res.json(info);
+        }
+    });
 
-app.get('/artists/:time_range', async (req, res) =>
-{
+app.get('/artists/:time_range', async (req, res) => {
     if (token == undefined)
         res.send("Error: Must be logged in to view artists");
-    else
-    {
+    else {
         let info = await userData.getArtistsByTimeRange(token.access_token, req.params.time_range);
         res.json(info);
     }
 });
 
-app.get('/tracks', async (req, res) =>
-{
+app.get('/tracks', async (req, res) => {
     if (token == undefined)
         res.send("Error: Must be logged in to view tracks");
-    else
-    {
+    else {
         let info = await userData.getTracks(token.access_token);
         res.json(info);
     }
 });
 
-app.get('/tracks/:time_range', async (req, res) =>
-{
+app.get('/tracks/:time_range', async (req, res) => {
     if (token == undefined)
         res.send("Error: Must be logged in to view tracks");
-    else
-    {
+    else {
         let info = await userData.getTracksByTimeRange(token.access_token, req.params.time_range);
         res.json(info);
     }
 });
 
-app.get('/recents', async (req, res) =>
-{
+app.get('/recents', async (req, res) => {
     if (token == undefined)
         res.send("Error: Must be logged in to view recents");
-    else
-    {
+    else {
         let info = await userData.getRecents(token.access_token);
         res.json(info);
     }

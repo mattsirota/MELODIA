@@ -6,7 +6,6 @@ function Tracks() {
   return (
     <>
       <NavBar />
-      <h1 className='tracks'>Here goes the tracks lists!!</h1>;
     </>
   );
 }
