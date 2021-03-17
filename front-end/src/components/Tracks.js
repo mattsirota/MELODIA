@@ -1,25 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import './Artists.css';
 import Artisttem from './ArtistItem';
 import axios from 'axios'
 
-function Artists() {
-  const [artists, setArtists] = useState([])
+function Tracks() {
+  const [tracks, setTracks] = useState([])
   const [selected, setSelected] = useState([])
   let ranges = [{'key':'short_term', 'value':'Last Month'}, {'key':'medium_term', 'value':'Last 6 Months'}, {'key':'long_term', 'value':'All Time'}]
   let count = 1;
   useEffect(() => {
-    axios.get('http://localhost:5000/artists').then(response => {
-      setArtists(response.data.items);
+    axios.get('http://localhost:5000/tracks').then(response => {
+      setTracks(response.data.items);
+      console.log(response.data.items);
       setSelected('medium_term')
     });
   }, [])
 
-  function getArtistsByTimeRange(range) {
+  function getTracksByTimeRange(range) {
     axios
-        .get("http://localhost:5000/artists/" + range)
+        .get("http://localhost:5000/tracks/" + range)
         .then(res => {
-            setArtists(res.data.items);
+            setTracks(res.data.items);
             setSelected(range)
           }
         )
@@ -27,14 +28,14 @@ function Artists() {
 
   return (
     <div className='cards'>
-      <h1>Top Artists</h1>
+      <h1>Top Tracks</h1>
       <div className='btn__container'>
         <div className='btn__wrapper'>
           <ul className='btn__items'>
             {ranges.map(range => 
               <li className='cards__item'>
                 <div className='cards__item__link'>
-                  <button className={range.key === selected ? 'btn-selected btn btn--primary btn--large' : 'btn-unselected btn btn--primary btn--large'} onClick={() => getArtistsByTimeRange(range.key)}>{range.value}</button>
+                  <button className={range.key === selected ? 'btn-selected btn btn--primary btn--large' : 'btn-unselected btn btn--primary btn--large'} onClick={() => getTracksByTimeRange(range.key)}>{range.value}</button>
                 </div>
               </li>
             )}
@@ -45,12 +46,12 @@ function Artists() {
         <div className='cards__wrapper'>
           <ul className='cards__items'>
             {
-              artists.map(artist => (
-                <Artisttem
-                  src={artist.images[0].url}
-                  text={artist.name}
-                  label={count++}
-                  path={artist.external_urls.spotify}
+              tracks.map(track => (
+              <Artisttem
+                src={track.album.images[0].url}
+                text={track.name}
+                label={count++}
+                path={track.external_urls.spotify}
                 />
               ))
             }
@@ -61,4 +62,4 @@ function Artists() {
   );
 }
 
-export default Artists;
+export default Tracks;
