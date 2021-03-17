@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from './Button';
+import { Button, playlistButton } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
@@ -58,18 +58,16 @@ function Navbar() {
                 Tracks
               </Link>
             </li>
-
-            <li>
-              <Link
-                to='/playlist'
-                className='nav-links-mobile'
+            <li className='nav-item'>
+              <a href='https://www.Spotify.com/us/logout'
+                className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Sign Up
-              </Link>
+                Log Out
+              </a>
             </li>
           </ul>
-          {button && <Button buttonStyle='btn--outline'>Create Your Playlist</Button>}
+          {button && <Link to='/playlist'> <Button buttonStyle='btn--outline'>Create Your Playlist</Button></Link>}
         </div>
       </nav>
     </>

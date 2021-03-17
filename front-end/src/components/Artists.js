@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './Artists.css';
 import Artisttem from './ArtistItem';
 import axios from 'axios'
@@ -46,11 +46,11 @@ function Artists() {
           <ul className='cards__items'>
             {
               artists.map(artist => (
-              <Artisttem
-                src={artist.images[0].url}
-                text={artist.name}
-                label={count++}
-                path={artist.external_urls.spotify}
+                <Artisttem
+                  src={artist.images[0].url}
+                  text={artist.name}
+                  label={count++}
+                  path={artist.external_urls.spotify}
                 />
               ))
             }

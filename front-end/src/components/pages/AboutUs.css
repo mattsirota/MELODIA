@@ -1,0 +1,52 @@
+
+.AboutUs-container {
+    background: url('/images/img_aboutus.jpg')center center/cover no-repeat;
+    /*background-color: #ffffff;*/
+    height: 95vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    object-fit: contain;
+    display: flex;
+    justify-content: top;
+    text-align: center;
+    padding: 24px;
+  }
+  
+  .AboutUs-subscription {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 24px;
+    color: rgb(12, 12, 12);
+  }
+  
+  .AboutUs-subscription > p {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+      'Lucida Sans', Arial, sans-serif;
+  }
+  .AboutUs{
+    margin-bottom: 34px;
+    font-size: 24px;
+  }
+  .AboutUs-description{
+    margin-bottom: 34px;
+    font-size: 24px;
+  }
+  .AboutUs-subscription-heading  {
+    margin-bottom: 34px;
+    font-size: 35px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+  }
+
+
+  .AboutUs-subscription-text {
+    margin-bottom: 24px;
+    font-size: 20px;
+  }
+  
