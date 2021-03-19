@@ -18,7 +18,8 @@ function ArtistItem(props) {
             </div>
           </a>
           <div className='cards__item__info'>
-            <h5 className='cards__item__text1'>{props.text1}</h5>
+            <h5 className='cards__item__text1'>Popularity: {props.popularity}</h5>
+            <h5 className='cards__item__text1'>Followers: {props.followers.toLocaleString()}</h5>
           </div>
         </div>
       </li>

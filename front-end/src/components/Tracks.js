@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './Artists.css';
-import Artisttem from './ArtistItem';
+import TrackItem from './TrackItem';
 import axios from 'axios'
 
 function Tracks() {
@@ -26,6 +26,8 @@ function Tracks() {
         )
   }
 
+
+
   return (
     <div className='cards'>
       <h1>Top Tracks</h1>
@@ -47,11 +49,14 @@ function Tracks() {
           <ul className='cards__items'>
             {
               tracks.map(track => (
-              <Artisttem
+              <TrackItem
                 src={track.album.images[0].url}
                 text={track.name}
+                popularity={track.popularity}
+                duration={track.duration_ms}
                 label={count++}
                 path={track.external_urls.spotify}
+                artists={track.artists}
                 />
               ))
             }
