@@ -25,9 +25,7 @@ function Tracks() {
           }
         )
   }
-
-
-
+  
   return (
     <div className='cards'>
       <h1>Top Tracks</h1>

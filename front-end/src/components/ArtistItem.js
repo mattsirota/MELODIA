@@ -5,7 +5,7 @@ function ArtistItem(props) {
     <>
       <li className='cards__item'>
         <div className='cards__item__link'>
-          <a href={props.path}>
+          <a href={props.path} target="_blank">
             <figure className='cards__item__pic-wrap' data-category={props.label}>
               <img
                 className='cards__item__img'
