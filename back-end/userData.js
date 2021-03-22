@@ -76,6 +76,45 @@ const exportedMethods =
 
         let token = await result.json();
         return token;
+    },
+    async createPlaylist(user_id, token, name, description, public)
+    {
+        const result = await fetch('https://api.spotify.com/v1/users/' + user_id + '/playlists', 
+        {
+            method: 'POST',
+            headers: 
+            {
+                'Authorization' : 'Bearer ' + token
+            },
+            body:
+                JSON.stringify({
+                "name": name,
+                "description": description,
+                "public": public
+            })
+        });
+
+        const data = await result.json();
+        return data;
+    },
+    async addSongs(playlist_id, token, songs)
+    {
+        const result = await fetch('https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks', 
+        {
+            method: 'POST',
+            headers: 
+            {
+                'Authorization' : 'Bearer ' + token,
+                'Content-Type' : 'application/json'
+            },
+            body:
+                JSON.stringify({
+                "uris": songs
+            })
+        });
+
+        const data = await result.json();
+        return data;
     }
 };
 
