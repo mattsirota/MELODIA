@@ -87,6 +87,15 @@ app.get('/tracks/:time_range', async (req, res) => {
     }
 });
 
+app.get('/recommendations/:artist_seed/:genre/:track_seed', async (req, res) => {
+    if (token == undefined)
+        res.send("Error: Must be logged in to view recents");
+    else {
+        let info = await userData.getReco(token.access_token, req.params.artist_seed, req.params.genre, req.params.track_seed);
+        res.json(info);
+    }
+});
+
 app.get('/recents', async (req, res) => {
     if (token == undefined)
         res.send("Error: Must be logged in to view recents");
@@ -122,3 +131,4 @@ app.get('/createPlaylist', async (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 });
+

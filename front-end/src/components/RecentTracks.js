@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Artists.css';
-import Artisttem from './ArtistItem';
+import TrackItem from './TrackItem';
 import axios from 'axios'
 
 function Recents() {
@@ -25,12 +25,14 @@ function Recents() {
                 <p>Fetching your recent tracks!</p>
               ) : (
                   items.map(items => (
-                    <Artisttem
+                    <TrackItem
                       src={items.track.album.images[0].url}
                       text={items.track.name}
-                      text1={items.track.album.artists[0].name}
+                      popularity={items.track.popularity}
+                      duration={items.track.duration_ms}
                       label={count++}
-                      path={items.track.external_urls.spotify} target="_blank"
+                      path={items.track.external_urls.spotify}
+                      artists={items.track.artists}
                     />
                   )))
             }

@@ -49,6 +49,8 @@ function Artists() {
                 <Artisttem
                   src={artist.images[0].url}
                   text={artist.name}
+                  popularity={artist.popularity}
+                  followers={artist.followers.total}
                   label={count++}
                   path={artist.external_urls.spotify}
                 />
