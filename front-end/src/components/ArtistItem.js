@@ -5,7 +5,7 @@ function ArtistItem(props) {
     <>
       <li className='cards__item'>
         <div className='cards__item__link'>
-          <a href={props.path}>
+          <a href={props.path} target="_blank">
             <figure className='cards__item__pic-wrap' data-category={props.label}>
               <img
                 className='cards__item__img'
@@ -18,7 +18,8 @@ function ArtistItem(props) {
             </div>
           </a>
           <div className='cards__item__info'>
-            <h5 className='cards__item__text1'>{props.text1}</h5>
+            <h5 className='cards__item__text1'>Popularity: {props.popularity}</h5>
+            <h5 className='cards__item__text1'>Followers: {props.followers.toLocaleString()}</h5>
           </div>
         </div>
       </li>

@@ -55,6 +55,13 @@ const exportedMethods =
         const data = await result.json();
         return data;
     },
+
+    async getReco(token,artist_seed, genre, track_seed)
+    {
+        const result = await fetch(`https://api.spotify.com/v1/recommendations?seed_artists=${artist_seed}&seed_genres=${genre}&seed_tracks=${track_seed}`, header(token));
+        const data = await result.json();
+        return data;
+    },
     
     async getToken(my_client_id, my_client_secret, auth_code, redirect_uri)
     {
@@ -76,6 +83,45 @@ const exportedMethods =
 
         let token = await result.json();
         return token;
+    },
+    async createPlaylist(user_id, token, name, description, public)
+    {
+        const result = await fetch('https://api.spotify.com/v1/users/' + user_id + '/playlists', 
+        {
+            method: 'POST',
+            headers: 
+            {
+                'Authorization' : 'Bearer ' + token
+            },
+            body:
+                JSON.stringify({
+                "name": name,
+                "description": description,
+                "public": public
+            })
+        });
+
+        const data = await result.json();
+        return data;
+    },
+    async addSongs(playlist_id, token, songs)
+    {
+        const result = await fetch('https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks', 
+        {
+            method: 'POST',
+            headers: 
+            {
+                'Authorization' : 'Bearer ' + token,
+                'Content-Type' : 'application/json'
+            },
+            body:
+                JSON.stringify({
+                "uris": songs
+            })
+        });
+
+        const data = await result.json();
+        return data;
     }
 };
 
