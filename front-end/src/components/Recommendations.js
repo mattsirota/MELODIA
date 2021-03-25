@@ -2,15 +2,33 @@ import React, { useState, useEffect } from 'react';
 import './Artists.css';
 import RecomItem from './RecomItems'
 import axios from 'axios'
+import RecoDropdown from './RecoDropdown'
+import { Link } from 'react-router-dom'
 
 function Recommendations() {
   const [ArtistReco, setArtists] = useState([])
   const [TracksReco, setTracks] = useState([])
   const [Recommendations, setReco] = useState([])
   const [genres, setGenres] = useState([])
-  
-  let count = 1;
+  const [selected, setSelected] = useState([])
+  const [dropdown, setDropdown] = useState(false)
 
+  const onMouseEnter = () => {
+    if (window.innerWidth < 960) {
+      setDropdown(false);
+    } else {
+      setDropdown(true);
+    }
+  };
+
+  const onMouseLeave = () => {
+    if (window.innerWidth < 960) {
+      setDropdown(false);
+    } else {
+      setDropdown(false);
+    }
+  }; 
+  let count = 1;
   useEffect(() => {
     axios.get('http://localhost:5000/artists').then(response => {
       setArtists(response.data.items);
@@ -61,11 +79,31 @@ function Recommendations() {
     });
   }
 
+  function recoGenres(genres){
+    axios.get(`http://localhost:5000/recommendations/${genres}`).then(response => {
+    setReco(response.data.tracks); 
+    setSelected(genres)
+  });
+}
+
+
   console.log(Recommendations)
 
   return (
     <div className='cards'>
       <h1>Recommended for you</h1>
+      <li 
+      className='reco-nav-item'
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      >
+        <Link 
+        className='reco-nav-links'
+        >
+          Genres  <i className='fas fa-caret-down'/>
+        </Link>
+        {dropdown && <RecoDropdown/>}      
+        </li>
       <div className='cards__container'>
         <div className='cards__wrapper'>
         {
