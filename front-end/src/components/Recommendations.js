@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './Artists.css';
-import RecomItem from './RecomItems'
+import TrackItem from './TrackItem'
 import axios from 'axios'
-import RecoDropdown from './RecoDropdown'
 import { Link } from 'react-router-dom'
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 function Recommendations() {
   const [ArtistReco, setArtists] = useState([])
@@ -61,7 +62,6 @@ function Recommendations() {
         let items = Object.keys(genres_count).map(function(key) {
             return [key, genres_count[key]];
         }).sort(function(first, second) {
-            //console.log(first)
             return second[1] - first[1];
         });
 
@@ -70,6 +70,7 @@ function Recommendations() {
             itemsGenres.push(item[0]);
         });
         setGenres(itemsGenres)
+        setSelected('Select genre...')
     });
   }, []);
 
@@ -79,31 +80,30 @@ function Recommendations() {
     });
   }
 
-  function recoGenres(genres){
-    axios.get(`http://localhost:5000/recommendations/${genres}`).then(response => {
-    setReco(response.data.tracks); 
-    setSelected(genres)
+  function recoGenres(e){
+    let genre = e.target.value;
+    axios.get(`http://localhost:5000/recommendations/${genre}`).then(response => {
+    setReco(response.data.tracks);
   });
 }
-
-
-  console.log(Recommendations)
 
   return (
     <div className='cards'>
       <h1>Recommended for you</h1>
-      <li 
-      className='reco-nav-item'
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      >
-        <Link 
-        className='reco-nav-links'
-        >
-          Genres  <i className='fas fa-caret-down'/>
-        </Link>
-        {dropdown && <RecoDropdown/>}      
-        </li>
+
+      <div className='btn__container'>
+        <div className='btn__wrapper'>
+          <ul className='btn__items'>
+          <select onChange={recoGenres} className={'reco-nav-item  reco-nav-links'}>
+          <option selected disabled className={'fas fa-caret-down'}>{selected}</option>
+            {genres.map((genre) => {
+                  return <option className={'reco-nav-links'}>{genre}</option>
+            })}
+          </select>
+          </ul> 
+        </div>
+      </div>
+
       <div className='cards__container'>
         <div className='cards__wrapper'>
         {
@@ -112,13 +112,15 @@ function Recommendations() {
           ):(
           <ul className='cards__items'>
           {
-              Recommendations.map(reco => (
-              <RecomItem
-                src={reco.album.images[0].url}
-                text={reco.name}
-                path = {reco.external_urls.spotify} 
-                label = {count++}
-                text1 = {reco.album.artists[0].name}
+              Recommendations.map(track => (
+                <TrackItem
+                src={track.album.images[0].url}
+                text={track.name}
+                popularity={track.popularity}
+                duration={track.duration_ms}
+                label={count++}
+                path={track.external_urls.spotify}
+                artists={track.artists}
                 />
               ))
             }
