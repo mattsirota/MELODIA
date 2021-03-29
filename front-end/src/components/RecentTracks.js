@@ -2,9 +2,14 @@ import React, {useState, useEffect} from 'react';
 import './Artists.css';
 import TrackItem from './TrackItem';
 import axios from 'axios'
+<<<<<<< Updated upstream
 import { Button, playlistButtonRecent } from './Button';
 import { Link } from 'react-router-dom';
 
+=======
+import { Button, playlistButton } from './Button';
+import { Link } from 'react-router-dom';
+>>>>>>> Stashed changes
 
 function Recents() {
   const [items, setRecents] = useState([])
@@ -20,8 +25,12 @@ function Recents() {
   return (
     <div className='cards'>
       <h1>Recent Tracks</h1>
+<<<<<<< Updated upstream
       <br />
       <h1><Link to='/playlistrecent'> <Button buttonStyle='cards__item__link'>Create Your Playlist</Button></Link></h1>
+=======
+      
+>>>>>>> Stashed changes
       <div className='cards__container'>
         <div className='cards__wrapper'>
           <ul className='cards__items'>
@@ -44,7 +53,7 @@ function Recents() {
           </ul>
         </div>
       </div>
-    </div>
+      </div>
   );
 
 }

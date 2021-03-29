@@ -1,9 +1,14 @@
 import React from 'react';
 import '../../App.css';
 import NavBar from '../Navbar'
+<<<<<<< Updated upstream
 import Recents from '../RecentTracks';
 import { Button } from '../Button';
 import { Link } from 'react-router-dom';
+=======
+import Recents from '../Recents';
+import { Button } from '../Button';
+>>>>>>> Stashed changes
 
   const Popup = props => {
   return (
@@ -12,6 +17,11 @@ import { Link } from 'react-router-dom';
       <Recents />
     <div className="popup-box">
       <div className="box">
+<<<<<<< Updated upstream
+=======
+        <span className="close-icon" onClick={props.handleClose}>x</span>
+        {props.content}
+>>>>>>> Stashed changes
         <form>
         <label>
           <p> Name: </p>
@@ -32,6 +42,7 @@ import { Link } from 'react-router-dom';
           </select>
           <br/>
           <br/>
+<<<<<<< Updated upstream
           
       <button className="btn btn-lg pro" id="submit"
               value="Submit">Create Your Play List</button>
@@ -43,12 +54,25 @@ import { Link } from 'react-router-dom';
               value="Close"> Close </button></Link>
       </form>
         
+=======
+          <fieldset>
+      <button className="btn btn-lg pro" id="submit"
+              value="Submit">Create Your Play List</button>
+    </fieldset>
+      </form>
+        <span className="close-icon" onClick={props.handleClose}>x</span>
+        {props.content}
+>>>>>>> Stashed changes
       </div>
     </div>
 </>
   );
+<<<<<<< Updated upstream
 };
 
  
 export default Popup;
       
+=======
+};
+>>>>>>> Stashed changes

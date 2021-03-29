@@ -7,11 +7,17 @@ import AboutUs from './components/pages/AboutUs';
 import AboutUs_home from './components/pages/AboutUs_home';
 import Playlist from './components/pages/Playlist';
 import PlaylistTracks from './components/pages/PlaylistTracks';
+import Recommendations from '../Recommendations';
 import Recents from './components/pages/Recents';
 import Tracks from './components/pages/Tracks';
+<<<<<<< Updated upstream
 import Recommendations from './components/pages/Recommendations';
 import PlaylistReco from './components/pages/PlaylistReco';
 import PlaylistRecents from './components/pages/PlaylistRecents';
+=======
+
+
+>>>>>>> Stashed changes
 function App() {
   return (
     <>
