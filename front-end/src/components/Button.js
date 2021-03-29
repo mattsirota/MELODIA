@@ -84,7 +84,7 @@ export const playlistButtonReco = ({
   );
 };
 
-export const playlistButtonRecents = ({
+export const playlistButtonRecent = ({
   children,
   type,
   onClick,
@@ -98,7 +98,7 @@ export const playlistButtonRecents = ({
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
   return (
-    <a href="/playlistrecents">
+    <a href="/playlistrecent">
       <button
         className={`btn ${checkButtonStyle} ${checkButtonSize}`}
         onClick={onClick}
