@@ -2,15 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './Artists.css';
 import RecomItem from './RecomItems'
 import axios from 'axios'
-<<<<<<< Updated upstream
 import { Button, playlistButtonReco} from './Button';
 import { Link } from 'react-router-dom';
 
 
-=======
-import { Button, playlistButton } from './Button';
-import { Link } from 'react-router-dom';
->>>>>>> Stashed changes
 
 function Recommendations() {
   const [ArtistReco, setArtists] = useState([])
@@ -75,20 +70,14 @@ function Recommendations() {
   return (
     <div className='cards'>
       <h1>Recommended for you</h1>
-<<<<<<< Updated upstream
       <br />
       <h1><Link to='/playlistreco'> <Button buttonStyle='cards__item__link'> Create Your Playlist </Button></Link></h1>
-=======
-      <h1><Link to='/playlist'> <Button buttonStyle='cards__item__link'>Create Your Playlist</Button></Link></h1>
->>>>>>> Stashed changes
       <div className='cards__container'>
         <div className='cards__wrapper'>
-        
         {
           Recommendations.length === 0 ? (
           reco(Artits_reco_id[0], (genres.slice(0, 3).join()).replace(/ /g, "%20"), Tracks_reco_id[0])
           ):(
-            
           <ul className='cards__items'>
           {
               Recommendations.map(reco => (
