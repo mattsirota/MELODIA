@@ -15,7 +15,6 @@ const redirect_uri = 'http://localhost:5000/login/authorize';
 const my_client_secret = 'SECRET';
 var auth_code = undefined;
 var token = undefined;
-
 app.get('/', (req, res) => {
     res.send('Hello World!')
 });

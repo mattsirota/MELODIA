@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import './Artists.css';
 import TrackItem from './TrackItem';
 import axios from 'axios'
+import { Button, playlistButton } from './Button';
+import { Link } from 'react-router-dom';
 
 function Tracks() {
   const [tracks, setTracks] = useState([])
@@ -39,6 +41,7 @@ function Tracks() {
                 </div>
               </li>
             )}
+            <Link to='/playlisttracks'> <Button buttonStyle='cards__item__link'>Create Your Playlist</Button></Link>
           </ul> 
         </div>
       </div>

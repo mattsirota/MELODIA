@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './Artists.css';
 import Artisttem from './ArtistItem';
 import axios from 'axios'
+import { Button, playlistButton } from './Button';
+import { Link } from 'react-router-dom';
 
 function Artists() {
   const [artists, setArtists] = useState([])
@@ -38,12 +40,14 @@ function Artists() {
                 </div>
               </li>
             )}
+             <Link to='/playlist'> <Button buttonStyle='cards__item__link' >Create Your Playlist</Button></Link>
           </ul> 
         </div>
       </div>
       <div className='cards__container'>
         <div className='cards__wrapper'>
           <ul className='cards__items'>
+        
             {
               artists.map(artist => (
                 <Artisttem
