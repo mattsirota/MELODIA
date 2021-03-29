@@ -76,7 +76,6 @@ function Navbar() {
               </a>
             </li>
           </ul>
-          {button && <Link to='/playlist'> <Button buttonStyle='btn--outline'>Create Your Playlist</Button></Link>}
         </div>
       </nav>
     </>

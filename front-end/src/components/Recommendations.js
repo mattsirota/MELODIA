@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './Artists.css';
 import RecomItem from './RecomItems'
 import axios from 'axios'
+import { Button, playlistButtonReco} from './Button';
+import { Link } from 'react-router-dom';
+
+
 
 function Recommendations() {
   const [ArtistReco, setArtists] = useState([])
@@ -66,6 +70,8 @@ function Recommendations() {
   return (
     <div className='cards'>
       <h1>Recommended for you</h1>
+      <br />
+      <h1><Link to='/playlistreco'> <Button buttonStyle='cards__item__link'> Create Your Playlist </Button></Link></h1>
       <div className='cards__container'>
         <div className='cards__wrapper'>
         {

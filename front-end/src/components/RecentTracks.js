@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import './Artists.css';
 import TrackItem from './TrackItem';
 import axios from 'axios'
+import { Button, playlistButtonRecent } from './Button';
+import { Link } from 'react-router-dom';
+
 
 function Recents() {
   const [items, setRecents] = useState([])
@@ -17,6 +20,8 @@ function Recents() {
   return (
     <div className='cards'>
       <h1>Recent Tracks</h1>
+      <br />
+      <h1><Link to='/playlistrecent'> <Button buttonStyle='cards__item__link'>Create Your Playlist</Button></Link></h1>
       <div className='cards__container'>
         <div className='cards__wrapper'>
           <ul className='cards__items'>

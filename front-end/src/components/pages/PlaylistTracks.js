@@ -3,7 +3,7 @@ import '../../App.css';
 import NavBar from '../Navbar'
 import Tracks from '../Tracks';
 import { Button } from '../Button';
-
+import { Link } from 'react-router-dom';
   const Popup = props => {
   return (
     <>
@@ -11,8 +11,7 @@ import { Button } from '../Button';
       <Tracks />
     <div className="popup-box">
       <div className="box">
-        <span className="close-icon" onClick={props.handleClose}>x</span>
-        {props.content}
+
         <form>
         <label>
           <p> Name: </p>
@@ -33,13 +32,16 @@ import { Button } from '../Button';
           </select>
           <br/>
           <br/>
-          <fieldset>
+       
       <button className="btn btn-lg pro" id="submit"
               value="Submit">Create Your Play List</button>
-    </fieldset>
+    <br />
+              <br />
+
+      
+      <Link to='/Tracks'><button className="btn btn-lg pro" id="close"
+              value="Close"> Close </button></Link>
       </form>
-        <span className="close-icon" onClick={props.handleClose}>x</span>
-        {props.content}
       </div>
     </div>
 </>
