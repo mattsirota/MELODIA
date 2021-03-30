@@ -4,10 +4,12 @@ import TrackItem from './TrackItem';
 import axios from 'axios'
 import { Button, playlistButtonRecent } from './Button';
 import { Link } from 'react-router-dom';
+import Popup from './Popup'
 
 
 function Recents() {
-  const [items, setRecents] = useState([])
+  const [items, setRecents] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   let count = 1;
   useEffect(() => {
     axios.get('http://localhost:5000/recents').then(response => {
@@ -16,12 +18,33 @@ function Recents() {
     });
   }, [])
 
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  }
 
   return (
     <div className='cards'>
       <h1>Recent Tracks</h1>
       <br />
-      <h1><Link to='/playlistrecent'> <Button buttonStyle='cards__item__link'> Create Your Playlist </Button></Link></h1>
+      <div className='btn__container'>
+        <div className='btn__wrapper'>
+          <ul className='btn__items'>
+            <div>
+                <input
+                  type="button"
+                  value="Create Your Playlist"
+                  onClick={togglePopup}
+                  className='cards__item__link btn-unselected btn btn--primary btn--large'
+                />
+                {isOpen && <Popup
+                  handleClose={togglePopup}
+                  theList={items}
+                  type="Recents"
+                />}
+            </div>
+          </ul>
+        </div>
+      </div>
       <div className='cards__container'>
         <div className='cards__wrapper'>
           <ul className='cards__items'>

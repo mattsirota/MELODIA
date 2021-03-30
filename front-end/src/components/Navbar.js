@@ -64,7 +64,7 @@ function Navbar() {
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Check these!
+                Recommended
               </Link>
             </li>
             <li className='nav-item'>

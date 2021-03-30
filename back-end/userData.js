@@ -122,6 +122,12 @@ const exportedMethods =
 
         const data = await result.json();
         return data;
+    },
+    async getArtistTopTracks(token, id)
+    {
+        const result = await fetch('https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US', header(token));
+        const data = await result.json();
+        return data;
     }
 };
 

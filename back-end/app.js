@@ -3,6 +3,8 @@ var request = require('request');
 const cors = require('cors');
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 const port = 5000;
 app.use(cors());
 
@@ -103,25 +105,49 @@ app.get('/recents', async (req, res) => {
         res.json(info);
     }
 });
-app.get('/createPlaylist', async (req, res) => {
+app.post('/createPlaylist', async (req, res) => {
     if (token == undefined)
         res.send("Error: Must be logged in to create playlist");
     else {
         let info = await userData.getProfile(token.access_token);
         let user_id = info.id
-        let newPlaylist = await userData.createPlaylist(user_id, token.access_token, "Test Playlist", "Top 20 songs last 6 months", true);
-        let playlist_id = newPlaylist.id;
-        //for now we're getting the top songs directly in here
-        //when front end is working, it will pass the id's of the
-        //songs to be used in songs list below
-        let songData = await userData.getTracksByTimeRange(token.access_token, 'medium_term');
-        songsList = songData.items;
-        songs = [];
-        for (let i = 0; i < songsList.length; i++)
-        {
-            songs[i] = "spotify:track:" + songsList[i].id
-        }
+        let playlistName = req.body.name;
+        let playlistDesc = req.body.description;
+        
+        let private = false;
+        if (req.body.privacy == "Private")
+            private = true;
 
+        let newPlaylist = await userData.createPlaylist(user_id, token.access_token, playlistName, playlistDesc, private);
+        let playlist_id = newPlaylist.id;
+
+        let songData = req.body.arr;
+        songs = [];
+
+        if (req.body.type == "Tracks" || req.body.type == "Recs")
+        {
+            for (let i = 0; i < songData.length; i++)
+            {
+                songs[i] = "spotify:track:" + songData[i].id
+            }
+        }
+        else if (req.body.type == "Recents")
+        {
+            for (let i = 0; i < songData.length; i++)
+            {
+                songs[i] = "spotify:track:" + songData[i].track.id
+            }
+        }
+        else
+        {
+            for (let i = 0; i < songData.length; i++)
+            {
+                let artistId = songData[i].id;
+                let artistTracks = await userData.getArtistTopTracks(token.access_token, artistId);
+                let randomIndex = Math.floor(Math.random() * 10);
+                songs[i] = "spotify:track:" + artistTracks.tracks[randomIndex].id
+            }
+        }
         let result = await userData.addSongs(playlist_id, token.access_token, songs);
         res.json(result);
     }
