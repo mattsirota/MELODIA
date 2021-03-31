@@ -62,22 +62,30 @@ const exportedMethods =
         return data;
     },
 
-    async getToken(my_client_id, my_client_secret, auth_code, redirect_uri) {
-        const result = await fetch('https://accounts.spotify.com/api/token',
-            {
-                method: 'POST',
-                headers:
-                {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': 'Basic ' + btoa(my_client_id + ':' + my_client_secret)
-                },
-                body:
-                    queryString.stringify({
-                        grant_type: 'authorization_code',
-                        code: auth_code,
-                        redirect_uri: redirect_uri
-                    })
-            });
+    async getGenresReco(token, genre)
+    {
+        const result = await fetch(`https://api.spotify.com/v1/recommendations?seed_genres=${genre}`, header(token));
+        const data = await result.json();
+        return data;
+    },
+    
+    async getToken(my_client_id, my_client_secret, auth_code, redirect_uri)
+    {
+        const result = await fetch('https://accounts.spotify.com/api/token', 
+        {
+              method: 'POST',
+              headers:
+              {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                  'Authorization': 'Basic ' + btoa(my_client_id + ':' + my_client_secret)
+              },
+              body:
+                  queryString.stringify({
+                      grant_type: 'authorization_code',
+                      code: auth_code,
+                      redirect_uri: redirect_uri
+                  })
+          });
 
         let token = await result.json();
         return token;
@@ -116,6 +124,12 @@ const exportedMethods =
                     })
             });
 
+        const data = await result.json();
+        return data;
+    },
+    async getArtistTopTracks(token, id)
+    {
+        const result = await fetch('https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US', header(token));
         const data = await result.json();
         return data;
     }

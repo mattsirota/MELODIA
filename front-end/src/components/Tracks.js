@@ -2,19 +2,26 @@ import React, {useState, useEffect} from 'react';
 import './Artists.css';
 import TrackItem from './TrackItem';
 import axios from 'axios'
+import { Button, playlistButton } from './Button';
+import { Link } from 'react-router-dom';
+import Popup from './Popup'
 
 function Tracks() {
   const [tracks, setTracks] = useState([])
   const [selected, setSelected] = useState([])
+  const [isOpen, setIsOpen] = useState(false);
   let ranges = [{'key':'short_term', 'value':'Last Month'}, {'key':'medium_term', 'value':'Last 6 Months'}, {'key':'long_term', 'value':'All Time'}]
   let count = 1;
   useEffect(() => {
     axios.get('http://localhost:5000/tracks').then(response => {
       setTracks(response.data.items);
-      console.log(response.data.items);
       setSelected('medium_term')
     });
   }, [])
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  }
 
   function getTracksByTimeRange(range) {
     axios
@@ -25,7 +32,6 @@ function Tracks() {
           }
         )
   }
-  
   return (
     <div className='cards'>
       <h1>Top Tracks</h1>
@@ -35,11 +41,27 @@ function Tracks() {
             {ranges.map(range => 
               <li className='cards__item'>
                 <div className='cards__item__link'>
-                  <button className={range.key === selected ? 'btn-selected btn btn--primary btn--large' : 'btn-unselected btn btn--primary btn--large'} onClick={() => getTracksByTimeRange(range.key)}>{range.value}</button>
+                  <button className={range.key === selected ? 'btn-selected btn btn--primary btn--large' : 'btn-unselected btn btn--primary btn--large'} 
+                  onClick={() => getTracksByTimeRange(range.key)}>
+                  {range.value}
+                  </button>
                 </div>
               </li>
             )}
           </ul> 
+        </div>
+        <div>
+          <input
+            type="button"
+            value="Create Your Playlist"
+            onClick={togglePopup}
+            className='cards__item__link btn-unselected btn btn--primary btn--large'
+          />
+          {isOpen && <Popup
+            handleClose={togglePopup}
+            theList={tracks}
+            type="Tracks"
+          />}
         </div>
       </div>
       <div className='cards__container'>

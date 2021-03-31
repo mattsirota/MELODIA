@@ -3,6 +3,8 @@ var request = require('request');
 const cors = require('cors');
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 const port = 5000;
 app.use(cors());
 
@@ -15,7 +17,6 @@ const redirect_uri = 'http://localhost:5000/login/authorize';
 const my_client_secret = '695369dc215a4534b36a46b6ae1da638';
 var auth_code = undefined;
 var token = undefined;
-
 app.get('/', (req, res) => {
     res.send('Hello World!')
 });
@@ -96,6 +97,15 @@ app.get('/recommendations/:artist_seed/:genre/:track_seed', async (req, res) => 
     }
 });
 
+app.get('/recommendations/:genre', async (req, res) => {
+    if (token == undefined)
+        res.send("Error: Must be logged in to view recents");
+    else {
+        let info = await userData.getGenresReco(token.access_token, req.params.genre);
+        res.json(info);
+    }
+});
+
 app.get('/recents', async (req, res) => {
     if (token == undefined)
         res.send("Error: Must be logged in to view recents");
@@ -114,24 +124,52 @@ app.get('/showplaylists', async (req, res) => {
     }
 });
 
-app.get('/createPlaylist', async (req, res) => {
+app.post('/createPlaylist', async (req, res) => {
     if (token == undefined)
         res.send("Error: Must be logged in to create playlist");
     else {
         let info = await userData.getProfile(token.access_token);
         let user_id = info.id
-        let newPlaylist = await userData.createPlaylist(user_id, token.access_token, "Test Playlist", "Top 20 songs last 6 months", true);
+        let playlistName = req.body.name;
+        let playlistDesc = req.body.description;
+        
+        let private = false;
+        if (req.body.privacy == "Private")
+            private = true;
+
+        let newPlaylist = await userData.createPlaylist(user_id, token.access_token, playlistName, playlistDesc, private);
         let playlist_id = newPlaylist.id;
-        //for now we're getting the top songs directly in here
-        //when front end is working, it will pass the id's of the
-        //songs to be used in songs list below
-        let songData = await userData.getTracksByTimeRange(token.access_token, 'medium_term');
-        songsList = songData.items;
+
+        let songData = req.body.arr;
         songs = [];
+      
         for (let i = 0; i < songsList.length; i++) {
             songs[i] = "spotify:track:" + songsList[i].id
-        }
 
+        if (req.body.type == "Tracks" || req.body.type == "Recs")
+        {
+            for (let i = 0; i < songData.length; i++)
+            {
+                songs[i] = "spotify:track:" + songData[i].id
+            }
+        }
+        else if (req.body.type == "Recents")
+        {
+            for (let i = 0; i < songData.length; i++)
+            {
+                songs[i] = "spotify:track:" + songData[i].track.id
+            }
+        }
+        else
+        {
+            for (let i = 0; i < songData.length; i++)
+            {
+                let artistId = songData[i].id;
+                let artistTracks = await userData.getArtistTopTracks(token.access_token, artistId);
+                let randomIndex = Math.floor(Math.random() * 10);
+                songs[i] = "spotify:track:" + artistTracks.tracks[randomIndex].id
+            }
+        }
         let result = await userData.addSongs(playlist_id, token.access_token, songs);
         res.json(result);
     }
