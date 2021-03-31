@@ -177,7 +177,6 @@ app.post('/createPlaylist', async (req, res) => {
         res.json(result);
     }
 });
-
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 });

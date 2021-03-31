@@ -30,7 +30,7 @@ function Popup(props) {
         <br/>
         <br/>
        
-      <input class="btn btn-lg pro" type="submit" value="Submit" onClick={getFormData}/>
+      <input class="submit-playlist" type="button" value="Submit" onClick={getFormData}/>
         <br/>
         <br />
       </form>
@@ -52,6 +52,11 @@ const getFormData = () =>{
         arr: theList,
         type: type
     })
+    .then((response) => {
+      window.location.href = "http://localhost:3000/showplaylists";
+    })
+
+    //axios.get("http://localhost:5000/showplaylists");
 }
  
 export default Popup;
