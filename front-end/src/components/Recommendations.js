@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './Artists.css';
 import TrackItem from './TrackItem'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import RecoDropdown from './RecoDropdown'
+import { Link } from 'react-router-dom'
 
 function Recommendations() {
   const [ArtistReco, setArtists] = useState([])
@@ -13,6 +14,8 @@ function Recommendations() {
   const [genres, setGenres] = useState([])
   const [selected, setSelected] = useState([])
   const [dropdown, setDropdown] = useState(false)
+  const dropDownGenre = ['None', 'Pop', 'Rock', 'Country', 'Hip-Hop', 'Indie', 'Dance', 'Jazz', 'Blues', 'Metal']
+
 
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
@@ -81,12 +84,28 @@ function Recommendations() {
   }
 
   function recoGenres(e){
-    let genre = e.target.value;
+    let genre = e.target.value.toLowerCase();
     axios.get(`http://localhost:5000/recommendations/${genre}`).then(response => {
     setReco(response.data.tracks);
   });
 }
 
+const [click, setClick] = useState(false);
+const handleClick = () => setClick(!click);
+
+/**<div className='btn__container'>
+        <div className='btn__wrapper'>
+          <ul className='btn__items'>
+          <select onChange={recoGenres} className={'reco-nav-item  reco-nav-links'}>
+            <option selected disabled>{selected}</option>
+            {dropDownGenre.map((genre) => {
+                  return <option className={'reco-nav-links'}>{genre}</option>
+            })}
+          </select>
+          </ul> 
+        </div>
+      </div>
+*/
   return (
     <div className='cards'>
       <h1>Recommended for you</h1>
@@ -95,8 +114,8 @@ function Recommendations() {
         <div className='btn__wrapper'>
           <ul className='btn__items'>
           <select onChange={recoGenres} className={'reco-nav-item  reco-nav-links'}>
-          <option selected disabled className={'fas fa-caret-down'}>{selected}</option>
-            {genres.map((genre) => {
+            <option selected disabled>{selected}</option>
+            {dropDownGenre.map((genre) => {
                   return <option className={'reco-nav-links'}>{genre}</option>
             })}
           </select>
