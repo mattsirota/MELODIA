@@ -62,6 +62,13 @@ const exportedMethods =
         const data = await result.json();
         return data;
     },
+
+    async getGenresReco(token, genre)
+    {
+        const result = await fetch(`https://api.spotify.com/v1/recommendations?seed_genres=${genre}`, header(token));
+        const data = await result.json();
+        return data;
+    },
     
     async getToken(my_client_id, my_client_secret, auth_code, redirect_uri)
     {

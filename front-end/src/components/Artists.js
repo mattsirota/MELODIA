@@ -42,7 +42,9 @@ function Artists() {
             {ranges.map(range => 
               <li className='cards__item'>
                 <div className='cards__item__link'>
-                  <button className={range.key === selected ? 'btn-selected btn btn--primary btn--large' : 'btn-unselected btn btn--primary btn--large'} onClick={() => getArtistsByTimeRange(range.key)}>{range.value}</button>
+                  <button className={range.key === selected ? 
+                  'btn-selected btn btn--primary btn--large' : 'btn-unselected btn btn--primary btn--large'}
+                   onClick={() => getArtistsByTimeRange(range.key)}>{range.value}</button>
                 </div>
               </li>
             )}

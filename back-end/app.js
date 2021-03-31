@@ -97,6 +97,15 @@ app.get('/recommendations/:artist_seed/:genre/:track_seed', async (req, res) => 
     }
 });
 
+app.get('/recommendations/:genre', async (req, res) => {
+    if (token == undefined)
+        res.send("Error: Must be logged in to view recents");
+    else {
+        let info = await userData.getGenresReco(token.access_token, req.params.genre);
+        res.json(info);
+    }
+});
+
 app.get('/recents', async (req, res) => {
     if (token == undefined)
         res.send("Error: Must be logged in to view recents");
