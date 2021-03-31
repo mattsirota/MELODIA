@@ -8,6 +8,7 @@ import AboutUs_home from './components/pages/AboutUs_home';
 import Playlist from './components/pages/Playlist';
 import Recents from './components/pages/Recents';
 import Tracks from './components/pages/Tracks';
+import UserPlaylists from './components/pages/UserPlaylists';
 import Recommendations from './components/pages/Recommendations';
 
 
@@ -23,6 +24,7 @@ function App() {
           <Route path='/playlist' exact component={Playlist} />
           <Route path='/recents' exact component={Recents} />
           <Route path='/tracks' exact component={Tracks} />
+          <Route path='/showplaylists' exact component={UserPlaylists} />
           <Route path='/recommendations' exact component={Recommendations} />
         </Switch>
       </Router>
