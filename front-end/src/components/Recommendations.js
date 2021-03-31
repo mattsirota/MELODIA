@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './Artists.css';
-import TrackItem from './TrackItem'
-import axios from 'axios'
+import TrackItem from './TrackItem';
+import axios from 'axios';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import RecoDropdown from './RecoDropdown'
-import { Link } from 'react-router-dom'
+import RecoDropdown from './RecoDropdown';
 import { Button, playlistButtonReco} from './Button';
 import { Link } from 'react-router-dom';
 import Popup from './Popup'
@@ -19,7 +18,7 @@ function Recommendations() {
   const [dropdown, setDropdown] = useState(false)
   const dropDownGenre = ['None', 'Pop', 'Rock', 'Country', 'Hip-Hop', 'Indie', 'Dance', 'Jazz', 'Blues', 'Metal']
   const [isOpen, setIsOpen] = useState(false);
-
+  let count = 1;
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
       setDropdown(false);
@@ -28,9 +27,6 @@ function Recommendations() {
     }
   };
 
-  
-  let count = 1;
-
   const onMouseLeave = () => {
     if (window.innerWidth < 960) {
       setDropdown(false);
@@ -38,7 +34,7 @@ function Recommendations() {
       setDropdown(false);
     }
   }; 
-  let count = 1;
+
   useEffect(() => {
     axios.get('http://localhost:5000/artists').then(response => {
       setArtists(response.data.items);
