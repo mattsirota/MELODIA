@@ -14,7 +14,7 @@ const userData = require('./userData');
 const my_client_id = '183edbaeffc94b3694e9153488fbf9b5';
 const redirect_uri = 'http://localhost:5000/login/authorize';
 //replace my_client_secret with your client secret code
-const my_client_secret = 'SECRET';
+const my_client_secret = '695369dc215a4534b36a46b6ae1da638';
 var auth_code = undefined;
 var token = undefined;
 app.get('/', (req, res) => {
@@ -114,6 +114,16 @@ app.get('/recents', async (req, res) => {
         res.json(info);
     }
 });
+
+app.get('/showplaylists', async (req, res) => {
+    if (token == undefined)
+        res.send("Error: Must be logged in to view recents");
+    else {
+        let info = await userData.getPlaylists(token.access_token);
+        res.json(info);
+    }
+});
+
 app.post('/createPlaylist', async (req, res) => {
     if (token == undefined)
         res.send("Error: Must be logged in to create playlist");
@@ -132,6 +142,9 @@ app.post('/createPlaylist', async (req, res) => {
 
         let songData = req.body.arr;
         songs = [];
+      
+        for (let i = 0; i < songsList.length; i++) {
+            songs[i] = "spotify:track:" + songsList[i].id
 
         if (req.body.type == "Tracks" || req.body.type == "Recs")
         {
