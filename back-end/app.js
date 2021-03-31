@@ -3,6 +3,8 @@ var request = require('request');
 const cors = require('cors');
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 const port = 5000;
 app.use(cors());
 
@@ -15,13 +17,12 @@ const redirect_uri = 'http://localhost:5000/login/authorize';
 const my_client_secret = 'SECRET';
 var auth_code = undefined;
 var token = undefined;
-
 app.get('/', (req, res) => {
     res.send('Hello World!')
 });
 
 app.get('/login', async (req, res) => {
-    var scope = 'user-read-private user-read-email user-top-read user-read-recently-played';
+    var scope = 'user-read-private user-read-email user-top-read user-read-recently-played playlist-modify-public playlist-modify-private playlist-read-private';
     res.redirect('https://accounts.spotify.com/authorize?' +
         queryString.stringify({
             response_type: 'code',
@@ -111,6 +112,53 @@ app.get('/recents', async (req, res) => {
     else {
         let info = await userData.getRecents(token.access_token);
         res.json(info);
+    }
+});
+app.post('/createPlaylist', async (req, res) => {
+    if (token == undefined)
+        res.send("Error: Must be logged in to create playlist");
+    else {
+        let info = await userData.getProfile(token.access_token);
+        let user_id = info.id
+        let playlistName = req.body.name;
+        let playlistDesc = req.body.description;
+        
+        let private = false;
+        if (req.body.privacy == "Private")
+            private = true;
+
+        let newPlaylist = await userData.createPlaylist(user_id, token.access_token, playlistName, playlistDesc, private);
+        let playlist_id = newPlaylist.id;
+
+        let songData = req.body.arr;
+        songs = [];
+
+        if (req.body.type == "Tracks" || req.body.type == "Recs")
+        {
+            for (let i = 0; i < songData.length; i++)
+            {
+                songs[i] = "spotify:track:" + songData[i].id
+            }
+        }
+        else if (req.body.type == "Recents")
+        {
+            for (let i = 0; i < songData.length; i++)
+            {
+                songs[i] = "spotify:track:" + songData[i].track.id
+            }
+        }
+        else
+        {
+            for (let i = 0; i < songData.length; i++)
+            {
+                let artistId = songData[i].id;
+                let artistTracks = await userData.getArtistTopTracks(token.access_token, artistId);
+                let randomIndex = Math.floor(Math.random() * 10);
+                songs[i] = "spotify:track:" + artistTracks.tracks[randomIndex].id
+            }
+        }
+        let result = await userData.addSongs(playlist_id, token.access_token, songs);
+        res.json(result);
     }
 });
 

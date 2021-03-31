@@ -6,6 +6,9 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import RecoDropdown from './RecoDropdown'
 import { Link } from 'react-router-dom'
+import { Button, playlistButtonReco} from './Button';
+import { Link } from 'react-router-dom';
+import Popup from './Popup'
 
 function Recommendations() {
   const [ArtistReco, setArtists] = useState([])
@@ -15,7 +18,7 @@ function Recommendations() {
   const [selected, setSelected] = useState([])
   const [dropdown, setDropdown] = useState(false)
   const dropDownGenre = ['None', 'Pop', 'Rock', 'Country', 'Hip-Hop', 'Indie', 'Dance', 'Jazz', 'Blues', 'Metal']
-
+  const [isOpen, setIsOpen] = useState(false);
 
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
@@ -24,6 +27,9 @@ function Recommendations() {
       setDropdown(true);
     }
   };
+
+  
+  let count = 1;
 
   const onMouseLeave = () => {
     if (window.innerWidth < 960) {
@@ -38,6 +44,10 @@ function Recommendations() {
       setArtists(response.data.items);
     });
   }, [])
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  }
 
   const Artits_reco_id = ArtistReco.map(artist => {
     return artist.id;
@@ -109,7 +119,6 @@ const handleClick = () => setClick(!click);
   return (
     <div className='cards'>
       <h1>Recommended for you</h1>
-
       <div className='btn__container'>
         <div className='btn__wrapper'>
           <ul className='btn__items'>
@@ -122,7 +131,26 @@ const handleClick = () => setClick(!click);
           </ul> 
         </div>
       </div>
-
+      <br />
+      <div className='btn__container'>
+        <div className='btn__wrapper'>
+          <ul className='btn__items'>
+            <div>
+                <input
+                  type="button"
+                  value="Create Your Playlist"
+                  onClick={togglePopup}
+                  className='cards__item__link btn-unselected btn btn--primary btn--large'
+                />
+                {isOpen && <Popup
+                  handleClose={togglePopup}
+                  theList={Recommendations}
+                  type="Recs"
+                />}
+            </div>
+          </ul>
+        </div>
+      </div>
       <div className='cards__container'>
         <div className='cards__wrapper'>
         {

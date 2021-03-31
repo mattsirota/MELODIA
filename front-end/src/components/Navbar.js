@@ -64,7 +64,7 @@ function Navbar() {
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Check these!
+                Recommended
               </Link>
             </li>
             <li className='nav-item'>
@@ -76,7 +76,6 @@ function Navbar() {
               </a>
             </li>
           </ul>
-          {button && <Link to='/playlist'> <Button buttonStyle='btn--outline'>Create Your Playlist</Button></Link>}
         </div>
       </nav>
     </>
