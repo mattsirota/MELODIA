@@ -14,7 +14,7 @@ const userData = require('./userData');
 const my_client_id = '183edbaeffc94b3694e9153488fbf9b5';
 const redirect_uri = 'http://localhost:5000/login/authorize';
 //replace my_client_secret with your client secret code
-const my_client_secret = '695369dc215a4534b36a46b6ae1da638';
+const my_client_secret = 'SECRET';
 var auth_code = undefined;
 var token = undefined;
 app.get('/', (req, res) => {
@@ -133,19 +133,16 @@ app.post('/createPlaylist', async (req, res) => {
         let playlistName = req.body.name;
         let playlistDesc = req.body.description;
         
-        let private = false;
+        let public = true;
         if (req.body.privacy == "Private")
-            private = true;
+            public = false;
 
-        let newPlaylist = await userData.createPlaylist(user_id, token.access_token, playlistName, playlistDesc, private);
+        let newPlaylist = await userData.createPlaylist(user_id, token.access_token, playlistName, playlistDesc, public);
         let playlist_id = newPlaylist.id;
 
         let songData = req.body.arr;
         songs = [];
       
-        for (let i = 0; i < songsList.length; i++) {
-            songs[i] = "spotify:track:" + songsList[i].id
-
         if (req.body.type == "Tracks" || req.body.type == "Recs")
         {
             for (let i = 0; i < songData.length; i++)
@@ -162,12 +159,18 @@ app.post('/createPlaylist', async (req, res) => {
         }
         else
         {
+            let count = 0;
+            
             for (let i = 0; i < songData.length; i++)
             {
                 let artistId = songData[i].id;
                 let artistTracks = await userData.getArtistTopTracks(token.access_token, artistId);
                 let randomIndex = Math.floor(Math.random() * 10);
-                songs[i] = "spotify:track:" + artistTracks.tracks[randomIndex].id
+                if (artistTracks.tracks.length != 0)
+                {
+                    songs[count] = "spotify:track:" + artistTracks.tracks[randomIndex].id;
+                    count++;
+                }
             }
         }
         let result = await userData.addSongs(playlist_id, token.access_token, songs);

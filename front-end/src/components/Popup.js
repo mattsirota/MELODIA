@@ -44,8 +44,7 @@ const getFormData = () =>{
     let description = document.getElementById('description').value;
     let privacy = document.getElementById('privacy').value;
     console.log(theList);
-    /*axios.get("http://localhost:5000/createPlaylist/"
-        + name + "/" + description + "/" + privacy + "/" + arrStr)*/
+
     axios.post("http://localhost:5000/createPlaylist", {
         name: name,
         description: description,

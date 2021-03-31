@@ -64,7 +64,7 @@ function Navbar() {
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Show Playlists
+                Playlists
               </Link>
             </li>
             <li className='nav-item'>
