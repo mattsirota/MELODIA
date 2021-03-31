@@ -30,7 +30,7 @@ function Popup(props) {
         <br/>
         <br/>
        
-      <input class="submit-playlist" type="button" value="Submit" onClick={getFormData}/>
+      <input class="submit-playlist" type="button" id="submit-playlist" value="Submit" onClick={getFormData}/>
         <br/>
         <br />
       </form>
@@ -43,7 +43,8 @@ const getFormData = () =>{
     let name = document.getElementById('name').value;
     let description = document.getElementById('description').value;
     let privacy = document.getElementById('privacy').value;
-    console.log(theList);
+
+    document.getElementById('submit-playlist').disabled = 'disabled';
 
     axios.post("http://localhost:5000/createPlaylist", {
         name: name,
