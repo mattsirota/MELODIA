@@ -49,6 +49,22 @@
   height: 80px;
 }
 
+.reco-nav-item {
+  color: lightgrey;
+  height: 50px;
+  width: 100px;
+  text-align: center;
+  display: flex;
+  flex: 1;
+  margin: 0 1rem;
+  min-width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
+  -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+  filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+  border-radius: 5px;
+}
+
 .nav-links {
   color: #fff;
   display: flex;

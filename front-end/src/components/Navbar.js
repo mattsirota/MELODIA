@@ -60,23 +60,23 @@ function Navbar() {
             </li>
             <li className='nav-item'>
               <Link
+                to='/showplaylists'
+                className='nav-links'
+                onClick={closeMobileMenu}
+              >
+                Playlists
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link
                 to='/recommendations'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Check these!
+                Recommended
               </Link>
             </li>
-            <li className='nav-item'>
-              <a href='https://www.Spotify.com/us/logout'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
-                Log Out
-              </a>
-            </li>
           </ul>
-          {button && <Link to='/playlist'> <Button buttonStyle='btn--outline'>Create Your Playlist</Button></Link>}
         </div>
       </nav>
     </>

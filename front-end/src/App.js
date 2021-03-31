@@ -6,11 +6,13 @@ import Home from './components/pages/Home';
 import AboutUs from './components/pages/AboutUs';
 import AboutUs_home from './components/pages/AboutUs_home';
 import Playlist from './components/pages/Playlist';
+import PlaylistTracks from './components/pages/PlaylistTracks';
 import Recents from './components/pages/Recents';
 import Tracks from './components/pages/Tracks';
+import UserPlaylists from './components/pages/UserPlaylists';
 import Recommendations from './components/pages/Recommendations';
-
-
+import PlaylistReco from './components/pages/PlaylistReco';
+import PlaylistRecents from './components/pages/PlaylistRecents';
 function App() {
   return (
     <>
@@ -23,7 +25,9 @@ function App() {
           <Route path='/playlist' exact component={Playlist} />
           <Route path='/recents' exact component={Recents} />
           <Route path='/tracks' exact component={Tracks} />
+          <Route path='/showplaylists' exact component={UserPlaylists} />
           <Route path='/recommendations' exact component={Recommendations} />
+          <Route path='/recenttracks' exact component={Recents} />
         </Switch>
       </Router>
 
