@@ -2,8 +2,6 @@ import React from 'react';
 import '../../App.css';
 import NavBar from '../Navbar'
 import Artists from '../Artists';
-import { Button } from '../Button';
-import Tracks from '../Tracks';
 
 import { Link } from 'react-router-dom';
   const Popup = props => {

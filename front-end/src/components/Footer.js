@@ -43,6 +43,7 @@ function Footer() {
               class='social-icon-link Spotify'
               to='/'
               target='_blank'
+              rel="noopener noreferrer"
               aria-label='Spotify'
             >
               <i class='fab fa-spotify' />
@@ -51,6 +52,7 @@ function Footer() {
               class='social-icon-link Github'
               to='/'
               target='_blank'
+              rel="noopener noreferrer"
               aria-label='Github'
             >
               <i class='fab fa-github' />

@@ -2,10 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './Artists.css';
 import TrackItem from './TrackItem';
 import axios from 'axios'
-import { Button, playlistButtonRecent } from './Button';
-import { Link } from 'react-router-dom';
 import Popup from './Popup'
-
 
 function Recents() {
   const [items, setRecents] = useState([]);

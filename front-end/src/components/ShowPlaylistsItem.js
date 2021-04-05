@@ -5,7 +5,7 @@ function ShowPlaylistsItem(props) {
     <>
       <li className='cards__item'>
         <div className='cards__item__link'>
-          <a href={props.path} style={{ textDecoration: 'none' }} target="_blank">
+          <a href={props.path} style={{ textDecoration: 'none' }} target="_blank" rel="noopener noreferrer">
             <figure className='cards__item__pic-wrap' data-category={props.label}>
               <img
                 className='cards__item__img'
