@@ -137,6 +137,17 @@ app.post('/createPlaylist', async (req, res) => {
         if (req.body.privacy == "Private")
             public = false;
 
+        if (playlistName === "")
+        {
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0')
+            let yyyy = today.getFullYear();
+
+            today = mm + '/' + dd + '/' + yyyy;
+            playlistName = info.display_name + " " + req.body.type + " " + today;
+        }
+
         let newPlaylist = await userData.createPlaylist(user_id, token.access_token, playlistName, playlistDesc, public);
         let playlist_id = newPlaylist.id;
 
