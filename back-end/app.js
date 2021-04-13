@@ -132,7 +132,7 @@ app.post('/createPlaylist', async (req, res) => {
         let user_id = info.id
         let playlistName = req.body.name;
         let playlistDesc = req.body.description;
-        
+
         let public = true;
         if (req.body.privacy == "Private")
             public = false;
@@ -142,32 +142,25 @@ app.post('/createPlaylist', async (req, res) => {
 
         let songData = req.body.arr;
         songs = [];
-      
-        if (req.body.type == "Tracks" || req.body.type == "Recs")
-        {
-            for (let i = 0; i < songData.length; i++)
-            {
+
+        if (req.body.type == "Tracks" || req.body.type == "Recs") {
+            for (let i = 0; i < songData.length; i++) {
                 songs[i] = "spotify:track:" + songData[i].id
             }
         }
-        else if (req.body.type == "Recents")
-        {
-            for (let i = 0; i < songData.length; i++)
-            {
+        else if (req.body.type == "Recents") {
+            for (let i = 0; i < songData.length; i++) {
                 songs[i] = "spotify:track:" + songData[i].track.id
             }
         }
-        else
-        {
+        else {
             let count = 0;
-            
-            for (let i = 0; i < songData.length; i++)
-            {
+
+            for (let i = 0; i < songData.length; i++) {
                 let artistId = songData[i].id;
                 let artistTracks = await userData.getArtistTopTracks(token.access_token, artistId);
                 let randomIndex = Math.floor(Math.random() * 10);
-                if (artistTracks.tracks.length != 0)
-                {
+                if (artistTracks.tracks.length != 0) {
                     songs[count] = "spotify:track:" + artistTracks.tracks[randomIndex].id;
                     count++;
                 }

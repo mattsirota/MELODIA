@@ -15,6 +15,8 @@ function ShowPlaylistsItem(props) {
             </figure>
             <div className='cards__item__info'>
               <h5 className='cards__item__text'>{props.text}</h5>
+              <a href={props.path} target="_blank">
+              </a>
             </div>
           </a>
         </div>

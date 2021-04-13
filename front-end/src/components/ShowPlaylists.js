@@ -28,6 +28,7 @@ function ShowPlaylists() {
                   <ShowPlaylistsItem
                     src={items.images[0].url}
                     text={items.name}
+                    path={items.external_urls.spotify}
                   />
                 )))
             }
