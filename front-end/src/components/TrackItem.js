@@ -18,7 +18,7 @@ function TrackItem(props) {
     <>
       <li className='cards__item'>
         <div className='cards__item__link'>
-          <a href={props.path}  style={{textDecoration: 'none'}} target="_blank">
+          <a href={props.path}  style={{textDecoration: 'none'}} target="_blank" rel="noopener noreferrer">
             <figure className='cards__item__pic-wrap' data-category={props.label}>
               <img
                 className='cards__item__img'
@@ -28,7 +28,7 @@ function TrackItem(props) {
             </figure>
             <div className='cards__item__info'>
               <h5 className='cards__item__text'>{props.text}</h5>
-              <a href={props.artists[0].external_urls.spotify} target="_blank">
+              <a href={props.artists[0].external_urls.spotify} target="_blank" rel="noopener noreferrer">
                 <h5 className='cards__item__text'>{props.artists[0].name}</h5>
               </a>
             </div>

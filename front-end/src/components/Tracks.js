@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react';
 import './Artists.css';
 import TrackItem from './TrackItem';
 import axios from 'axios'
-import { Button, playlistButton } from './Button';
-import { Link } from 'react-router-dom';
 import Popup from './Popup'
 
 function Tracks() {
@@ -12,6 +10,7 @@ function Tracks() {
   const [isOpen, setIsOpen] = useState(false);
   let ranges = [{'key':'short_term', 'value':'Last Month'}, {'key':'medium_term', 'value':'Last 6 Months'}, {'key':'long_term', 'value':'All Time'}]
   let count = 1;
+
   useEffect(() => {
     axios.get('http://localhost:5000/tracks').then(response => {
       setTracks(response.data.items);
@@ -32,6 +31,7 @@ function Tracks() {
           }
         )
   }
+
   return (
     <div className='cards'>
       <h1>Top Tracks</h1>

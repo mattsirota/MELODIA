@@ -3,9 +3,11 @@ import axios from 'axios';
 
 let theList = [];
 let type = "";
+
 function Popup(props) {
-    theList = props.theList;
-    type = props.type;
+  theList = props.theList;
+  type = props.type;
+
   return (
     <div className="popup-box">
       <div className="box">
@@ -40,24 +42,24 @@ function Popup(props) {
 };
 
 const getFormData = () =>{
-    let name = document.getElementById('name').value;
-    let description = document.getElementById('description').value;
-    let privacy = document.getElementById('privacy').value;
+  let name = document.getElementById('name').value;
+  let description = document.getElementById('description').value;
+  let privacy = document.getElementById('privacy').value;
 
-    document.getElementById('submit-playlist').disabled = 'disabled';
+  document.getElementById('submit-playlist').disabled = 'disabled';
 
-    axios.post("http://localhost:5000/createPlaylist", {
-        name: name,
-        description: description,
-        privacy: privacy,
-        arr: theList,
-        type: type
-    })
-    .then((response) => {
-      window.location.href = "http://localhost:3000/showplaylists";
-    })
+  axios.post("http://localhost:5000/createPlaylist", {
+      name: name,
+      description: description,
+      privacy: privacy,
+      arr: theList,
+      type: type
+  })
+  .then((response) => {
+    window.location.href = "http://localhost:3000/showplaylists";
+  })
 
-    //axios.get("http://localhost:5000/showplaylists");
+  //axios.get("http://localhost:5000/showplaylists");
 }
  
 export default Popup;

@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Artists.css';
 import TrackItem from './TrackItem';
 import axios from 'axios';
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import RecoDropdown from './RecoDropdown';
-import { Button, playlistButtonReco} from './Button';
-import { Link } from 'react-router-dom';
 import Popup from './Popup'
 
 function Recommendations() {
@@ -15,26 +11,10 @@ function Recommendations() {
   const [Recommendations, setReco] = useState([])
   const [genres, setGenres] = useState([])
   const [selected, setSelected] = useState([])
-  const [dropdown, setDropdown] = useState(false)
-  const dropDownGenre = ['None', 'Pop', 'Rock', 'Country', 'Hip-Hop', 'Indie', 'Dance', 'Jazz', 'Blues', 'Metal']
+  const dropDownGenre = ['Default', 'Pop', 'Rock', 'Country', 'Hip-Hop', 'Indie', 'Dance', 'Jazz', 'Blues', 'Metal']
   const [isOpen, setIsOpen] = useState(false);
   let count = 1;
-  const onMouseEnter = () => {
-    if (window.innerWidth < 960) {
-      setDropdown(false);
-    } else {
-      setDropdown(true);
-    }
-  };
-
-  const onMouseLeave = () => {
-    if (window.innerWidth < 960) {
-      setDropdown(false);
-    } else {
-      setDropdown(false);
-    }
-  }; 
-
+  
   useEffect(() => {
     axios.get('http://localhost:5000/artists').then(response => {
       setArtists(response.data.items);
@@ -96,23 +76,7 @@ function Recommendations() {
   });
 }
 
-const [click, setClick] = useState(false);
-const handleClick = () => setClick(!click);
-
-/**<div className='btn__container'>
-        <div className='btn__wrapper'>
-          <ul className='btn__items'>
-          <select onChange={recoGenres} className={'reco-nav-item  reco-nav-links'}>
-            <option selected disabled>{selected}</option>
-            {dropDownGenre.map((genre) => {
-                  return <option className={'reco-nav-links'}>{genre}</option>
-            })}
-          </select>
-          </ul> 
-        </div>
-      </div>
-*/
-  return (
+return (
     <div className='cards'>
       <h1>Recommended for you</h1>
       <div className='btn__container'>

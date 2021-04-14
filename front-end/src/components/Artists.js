@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './Artists.css';
 import Artisttem from './ArtistItem';
 import axios from 'axios'
-import { Button, playlistButton } from './Button';
-import { Link } from 'react-router-dom';
 import Popup from './Popup'
 
 function Artists() {

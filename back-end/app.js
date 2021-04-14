@@ -17,6 +17,7 @@ const redirect_uri = 'http://localhost:5000/login/authorize';
 const my_client_secret = 'SECRET';
 var auth_code = undefined;
 var token = undefined;
+
 app.get('/', (req, res) => {
     res.send('Hello World!')
 });
@@ -136,6 +137,17 @@ app.post('/createPlaylist', async (req, res) => {
         let public = true;
         if (req.body.privacy == "Private")
             public = false;
+
+        if (playlistName === "")
+        {
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0')
+            let yyyy = today.getFullYear();
+
+            today = mm + '/' + dd + '/' + yyyy;
+            playlistName = info.display_name + " " + req.body.type + " " + today;
+        }
 
         let newPlaylist = await userData.createPlaylist(user_id, token.access_token, playlistName, playlistDesc, public);
         let playlist_id = newPlaylist.id;

@@ -5,14 +5,12 @@ import axios from 'axios'
 
 function ShowPlaylists() {
   const [items, setShowPlaylists] = useState([])
-  let count = 1;
   useEffect(() => {
     axios.get('http://localhost:5000/showplaylists').then(response => {
       setShowPlaylists(response.data.items);
       console.log(response.data.items)
     });
   }, [])
-
 
   return (
     <div className='cards'>

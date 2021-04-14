@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../App.css';
 import './AboutUs.css'
-import { Button } from '../Button';
 import LoginNavbar from '../LoginNavbar';
+
 function AboutUs() {
     return (
       <> <LoginNavbar />
