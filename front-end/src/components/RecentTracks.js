@@ -9,7 +9,7 @@ function Recents() {
   const [isOpen, setIsOpen] = useState(false);
   let count = 1;
   useEffect(() => {
-    axios.get('http://localhost:5000/recents').then(response => {
+    axios.get('http://localhost:5000/recents', {withCredentials: true}).then(response => {
       setRecents(response.data.items);
       console.log(response.data.items)
     });

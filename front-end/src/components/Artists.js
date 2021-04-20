@@ -11,7 +11,7 @@ function Artists() {
   let ranges = [{'key':'short_term', 'value':'Last Month'}, {'key':'medium_term', 'value':'Last 6 Months'}, {'key':'long_term', 'value':'All Time'}]
   let count = 1;
   useEffect(() => {
-    axios.get('http://localhost:5000/artists').then(response => {
+    axios.get('http://localhost:5000/artists', {withCredentials: true}).then(response => {
       setArtists(response.data.items);
       setSelected('medium_term')
     });
@@ -23,7 +23,7 @@ function Artists() {
 
   function getArtistsByTimeRange(range) {
     axios
-        .get("http://localhost:5000/artists/" + range)
+        .get("http://localhost:5000/artists/" + range, {withCredentials: true})
         .then(res => {
             setArtists(res.data.items);
             setSelected(range)

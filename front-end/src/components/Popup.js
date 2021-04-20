@@ -48,12 +48,16 @@ const getFormData = () =>{
 
   document.getElementById('submit-playlist').disabled = 'disabled';
 
-  axios.post("http://localhost:5000/createPlaylist", {
+  axios("http://localhost:5000/createPlaylist", {
+    method: 'post',
+    data: {
       name: name,
       description: description,
       privacy: privacy,
       arr: theList,
       type: type
+    },
+    withCredentials: true
   })
   .then((response) => {
     window.location.href = "http://localhost:3000/showplaylists";

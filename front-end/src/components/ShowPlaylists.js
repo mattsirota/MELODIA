@@ -6,7 +6,7 @@ import axios from 'axios'
 function ShowPlaylists() {
   const [items, setShowPlaylists] = useState([])
   useEffect(() => {
-    axios.get('http://localhost:5000/showplaylists').then(response => {
+    axios.get('http://localhost:5000/showplaylists', {withCredentials: true}).then(response => {
       setShowPlaylists(response.data.items);
       console.log(response.data.items)
     });
