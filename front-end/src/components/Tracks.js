@@ -12,7 +12,7 @@ function Tracks() {
   let count = 1;
 
   useEffect(() => {
-    axios.get('http://localhost:5000/tracks').then(response => {
+    axios.get('http://localhost:5000/tracks', {withCredentials: true}).then(response => {
       setTracks(response.data.items);
       setSelected('medium_term')
     });
@@ -24,7 +24,7 @@ function Tracks() {
 
   function getTracksByTimeRange(range) {
     axios
-        .get("http://localhost:5000/tracks/" + range)
+        .get("http://localhost:5000/tracks/" + range, {withCredentials: true})
         .then(res => {
             setTracks(res.data.items);
             setSelected(range)

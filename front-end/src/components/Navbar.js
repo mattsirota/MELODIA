@@ -59,7 +59,15 @@ function Navbar() {
                 Playlists
               </Link>
             </li>
+            <li className='nav-item'>
+              <a href ='http://localhost:5000/logout'
+                className='nav-links'
+                >
+                  <img src='/images/logout.jpg' alt='Logout'/>
+              </a>
+              </li>
           </ul>
+          
         </div>
       </nav>
     </>

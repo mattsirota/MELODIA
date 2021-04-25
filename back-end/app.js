@@ -1,13 +1,23 @@
 const express = require('express');
-var request = require('request');
-const cors = require('cors');
-
+const cookieParser = require('cookie-parser');
 const app = express();
+const session = require('express-session');
+const open = require('open')
+
+app.use(cookieParser());
+app.use(session({secret: 'mx9sng7s30mf49dhsmk37hdjsh1nd82q', resave: true, saveUninitialized: false}));
+
+const cors = require('cors');
+const corsConfig = {
+    credentials: true,
+    origin: true,
+};
+
+app.use(cors(corsConfig));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
-const port = 5000;
-app.use(cors());
 
+const port = 5000;
 const queryString = require('query-string');
 const userData = require('./userData');
 
@@ -19,7 +29,7 @@ var auth_code = undefined;
 var token = undefined;
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('Hello World!');
 });
 
 app.get('/login', async (req, res) => {
@@ -33,103 +43,103 @@ app.get('/login', async (req, res) => {
         }));
 }),
 
-    app.get('/login/authorize', async (req, res) => {
-        if (req.query.code == undefined)
-            res.send("Not authorized to view this page");
-        else {
-            auth_code = req.query.code
-            token = await userData.getToken(my_client_id, my_client_secret, auth_code, redirect_uri);
-            res.redirect('http://localhost:3000/home');
-        }
-    }),
+app.get('/login/authorize', async (req, res) => {
+    if (req.query.code == undefined)
+        res.send("Not authorized to view this page");
+    else {
+        auth_code = req.query.code;
+        token = await userData.getToken(my_client_id, my_client_secret, auth_code, redirect_uri);
+        res.cookie('token', token);
+        res.redirect('http://localhost:3000/home');
+    }
+}),
 
-    app.get('/profile', async (req, res) => {
-        if (token == undefined)
-            res.send({ "display_name": "Error: Must be logged in to view profile" });
-        else {
-            let info = await userData.getProfile(token.access_token);
-            res.send(info);
-        }
+app.get('/profile', async (req, res) => {
+    if (req.cookies['token'] == undefined)
+        res.send({ "display_name": "Error: Must be logged in to view profile" });
+    else {
+        let info = await userData.getProfile(req.cookies['token'].access_token);
+        res.send(info);
+    }
+}),
 
-    }),
-
-    app.get('/artists', async (req, res) => {
-        if (token == undefined)
-            res.send("Error: Must be logged in to view artists");
-        else {
-            let info = await userData.getArtists(token.access_token);
-            res.json(info);
-        }
-    });
-
-app.get('/artists/:time_range', async (req, res) => {
-    if (token == undefined)
+app.get('/artists', async (req, res) => {
+    if (req.cookies['token'] == undefined)
         res.send("Error: Must be logged in to view artists");
     else {
-        let info = await userData.getArtistsByTimeRange(token.access_token, req.params.time_range);
+        let info = await userData.getArtists(req.cookies['token'].access_token);
+        res.json(info);
+    }
+});
+
+app.get('/artists/:time_range', async (req, res) => {
+    if (req.cookies['token'] == undefined)
+        res.send("Error: Must be logged in to view artists");
+    else {
+        let info = await userData.getArtistsByTimeRange(req.cookies['token'].access_token, req.params.time_range);
         res.json(info);
     }
 });
 
 app.get('/tracks', async (req, res) => {
-    if (token == undefined)
+    if (req.cookies['token'] == undefined)
         res.send("Error: Must be logged in to view tracks");
     else {
-        let info = await userData.getTracks(token.access_token);
+        let info = await userData.getTracks(req.cookies['token'].access_token);
         res.json(info);
     }
 });
 
 app.get('/tracks/:time_range', async (req, res) => {
-    if (token == undefined)
+    if (req.cookies['token'] == undefined)
         res.send("Error: Must be logged in to view tracks");
     else {
-        let info = await userData.getTracksByTimeRange(token.access_token, req.params.time_range);
+        let info = await userData.getTracksByTimeRange(req.cookies['token'].access_token, req.params.time_range);
         res.json(info);
     }
 });
 
 app.get('/recommendations/:artist_seed/:genre/:track_seed', async (req, res) => {
-    if (token == undefined)
+    if (req.cookies['token'] == undefined)
         res.send("Error: Must be logged in to view recents");
     else {
-        let info = await userData.getReco(token.access_token, req.params.artist_seed, req.params.genre, req.params.track_seed);
+        let info = await userData.getReco(req.cookies['token'].access_token, req.params.artist_seed, req.params.genre, req.params.track_seed);
         res.json(info);
     }
 });
 
 app.get('/recommendations/:genre', async (req, res) => {
-    if (token == undefined)
+    if (req.cookies['token'] == undefined)
         res.send("Error: Must be logged in to view recents");
     else {
-        let info = await userData.getGenresReco(token.access_token, req.params.genre);
+        let info = await userData.getGenresReco(req.cookies['token'].access_token, req.params.genre);
         res.json(info);
     }
 });
 
 app.get('/recents', async (req, res) => {
-    if (token == undefined)
+    if (req.cookies['token'] == undefined)
         res.send("Error: Must be logged in to view recents");
     else {
-        let info = await userData.getRecents(token.access_token);
+        let info = await userData.getRecents(req.cookies['token'].access_token);
         res.json(info);
     }
 });
 
 app.get('/showplaylists', async (req, res) => {
-    if (token == undefined)
+    if (req.cookies['token'] == undefined)
         res.send("Error: Must be logged in to view recents");
     else {
-        let info = await userData.getPlaylists(token.access_token);
+        let info = await userData.getPlaylists(req.cookies['token'].access_token);
         res.json(info);
     }
 });
 
 app.post('/createPlaylist', async (req, res) => {
-    if (token == undefined)
+    if (req.cookies['token'] == undefined)
         res.send("Error: Must be logged in to create playlist");
     else {
-        let info = await userData.getProfile(token.access_token);
+        let info = await userData.getProfile(req.cookies['token'].access_token);
         let user_id = info.id
         let playlistName = req.body.name;
         let playlistDesc = req.body.description;
@@ -149,7 +159,7 @@ app.post('/createPlaylist', async (req, res) => {
             playlistName = info.display_name + " " + req.body.type + " " + today;
         }
 
-        let newPlaylist = await userData.createPlaylist(user_id, token.access_token, playlistName, playlistDesc, public);
+        let newPlaylist = await userData.createPlaylist(user_id, req.cookies['token'].access_token, playlistName, playlistDesc, public);
         let playlist_id = newPlaylist.id;
 
         let songData = req.body.arr;
@@ -170,7 +180,7 @@ app.post('/createPlaylist', async (req, res) => {
 
             for (let i = 0; i < songData.length; i++) {
                 let artistId = songData[i].id;
-                let artistTracks = await userData.getArtistTopTracks(token.access_token, artistId);
+                let artistTracks = await userData.getArtistTopTracks(req.cookies['token'].access_token, artistId);
                 let randomIndex = Math.floor(Math.random() * 10);
                 if (artistTracks.tracks.length != 0) {
                     songs[count] = "spotify:track:" + artistTracks.tracks[randomIndex].id;
@@ -178,11 +188,22 @@ app.post('/createPlaylist', async (req, res) => {
                 }
             }
         }
-        let result = await userData.addSongs(playlist_id, token.access_token, songs);
+        let result = await userData.addSongs(playlist_id, req.cookies['token'].access_token, songs);
         res.json(result);
     }
 });
+
+app.get('/logout', function (req, res) {
+    res.clearCookie('token');
+    req.session.destroy();
+    console.log('Logged out from Melodia');
+
+    res.redirect('https://www.spotify.com/us/logout');
+    console.log('Logged out from Spotify');
+
+    open('http://localhost:3000');
+});
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 });
-

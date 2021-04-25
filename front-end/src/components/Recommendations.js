@@ -16,7 +16,7 @@ function Recommendations() {
   let count = 1;
   
   useEffect(() => {
-    axios.get('http://localhost:5000/artists').then(response => {
+    axios.get('http://localhost:5000/artists', {withCredentials: true}).then(response => {
       setArtists(response.data.items);
     });
   }, [])
@@ -30,7 +30,7 @@ function Recommendations() {
   })
 
   useEffect(() => {
-    axios.get('http://localhost:5000/tracks').then(response => {
+    axios.get('http://localhost:5000/tracks', {withCredentials: true}).then(response => {
       setTracks(response.data.items);
     });
   }, [])
@@ -40,7 +40,7 @@ function Recommendations() {
   })
 
   useEffect(() => {
-    axios.get('http://localhost:5000/artists').then(response => {
+    axios.get('http://localhost:5000/artists', {withCredentials: true}).then(response => {
         let genres_count = {};
         response.data.items.map(artist => (
             artist.genres.map(genre => (
@@ -64,14 +64,14 @@ function Recommendations() {
   }, []);
 
   function reco(artist, genres, tracks){
-      axios.get(`http://localhost:5000/recommendations/${artist}/${genres}/${tracks}`).then(response => {
+      axios.get(`http://localhost:5000/recommendations/${artist}/${genres}/${tracks}`, {withCredentials: true}).then(response => {
       setReco(response.data.tracks); 
     });
   }
 
   function recoGenres(e){
     let genre = e.target.value.toLowerCase();
-    axios.get(`http://localhost:5000/recommendations/${genre}`).then(response => {
+    axios.get(`http://localhost:5000/recommendations/${genre}`, {withCredentials: true}).then(response => {
     setReco(response.data.tracks);
   });
 }

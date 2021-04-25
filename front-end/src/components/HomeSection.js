@@ -7,7 +7,8 @@ function HomeSection() {
   const [name, setName] = useState("")
 
   useEffect(() => {
-    axios.get('http://localhost:5000/profile').then(response => {
+    axios.get('http://localhost:5000/profile', {withCredentials: true}).then(response => {
+      console.log(response)
       setName(response.data.display_name);
       console.log(response.data.display_name);
     });
