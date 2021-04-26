@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import './Popup.css';
 
 let theList = [];
 let type = "";
@@ -14,34 +15,44 @@ function Popup(props) {
         <span className="close-icon" onClick={props.handleClose}>x</span>
         {props.content}
         <form>
-        <label>
-          <p> Name: </p>
-          <input type="text" id="name" size="30" placeholder="Name*"/>
+          <div className="row">
+            <div className="col-35">
+              <label for="name">Name</label>
+            </div>
+            <div className="col-65">
+              <input type="text" id="name" placeholder="Playlist Name..."></input>
+            </div>
+          </div>
+          <div class="row">
+            <div className="col-35">
+              <label for="description">Description</label>
+            </div>
+            <div className="col-65">
+              <input type="text" id="description" placeholder="Description..."></input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-35">
+              <label for="country">Privacy</label>
+            </div>
+            <div class="col-65">
+              <select id="privacy">
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+              </select>
+            </div>
+          </div>
           <br/>
-          <br/>
-          <p> Description: </p>
-          <input type="text" id="description" size="35" placeholder="Description*"/>
-        </label>
-        <br/>
-        <br/>
-        <p> Privacy Setting: </p>
-        <select id="privacy">
-            <option value="Public"> Public </option>
-            <option value="Private"> Private </option>
-        </select>
-        <br/>
-        <br/>
-       
-      <input class="submit-playlist" type="button" id="submit-playlist" value="Submit" onClick={getFormData}/>
-        <br/>
-        <br />
-      </form>
+          <div class="row" margin="auto">
+            <input type="submit" id="submit-playlist" value="Submit" onClick={getFormData}/>
+          </div>
+        </form>
       </div>
     </div>
   );
 };
 
-const getFormData = () =>{
+const getFormData = () => {
   let name = document.getElementById('name').value;
   let description = document.getElementById('description').value;
   let privacy = document.getElementById('privacy').value;
@@ -59,11 +70,11 @@ const getFormData = () =>{
     },
     withCredentials: true
   })
-  .then((response) => {
-    window.location.href = "http://localhost:3000/showplaylists";
-  })
+    .then((response) => {
+      window.location.href = "http://localhost:3000/showplaylists";
+    })
 
   //axios.get("http://localhost:5000/showplaylists");
 }
- 
+
 export default Popup;
